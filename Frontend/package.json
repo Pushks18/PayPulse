@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "homepage": "https://pay-pulse-ebon.vercel.app/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
