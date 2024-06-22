@@ -21,7 +21,7 @@ const SendMoney = () => {
     }
     try {
       const response = await axios.post(
-        "https://paypulse.onrender.com/v1/account/transfer",
+        "https://paypulse.onrender.com/api/v1/account/transfer",
         {
           to: id,
           amount: parseFloat(amount), // Ensure amount is a number
