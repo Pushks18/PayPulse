@@ -12,10 +12,13 @@ function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleSignin = async () => {
-    const res = await axios.post("http://localhost:3000/api/v1/user/signin", {
-      username,
-      password,
-    });
+    const res = await axios.post(
+      "https://paypulse.onrender.com/api/v1/user/signin",
+      {
+        username,
+        password,
+      }
+    );
     if (res.data.token) {
       localStorage.setItem("token", res.data.token);
       toast.success("You are signed in");

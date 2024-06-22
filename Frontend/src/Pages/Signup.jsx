@@ -14,12 +14,15 @@ function Signup() {
   const [password, setPassword] = useState("");
 
   const handleSignup = async () => {
-    const res = await axios.post("http://localhost:3000/api/v1/user/signup", {
-      firstName,
-      lastName,
-      username,
-      password,
-    });
+    const res = await axios.post(
+      "https://paypulse.onrender.com/api/v1/user/signup",
+      {
+        firstName,
+        lastName,
+        username,
+        password,
+      }
+    );
     // console.log(res.data);
     localStorage.setItem("token", res.data.token);
     setFirstName(res.data.firstName);

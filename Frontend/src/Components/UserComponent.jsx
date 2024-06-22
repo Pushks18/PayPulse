@@ -11,7 +11,7 @@ const UserComponent = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/user/bulk?filter=${filter.toLowerCase()}`
+          `https://paypulse.onrender.com/api/v1/user/bulk?filter=${filter.toLowerCase()}`
         );
         setUsers(response.data.user);
       } catch (error) {
