@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Frontend URL
+    origin: "https://paypulse.onrender.com", // Frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -22,7 +22,7 @@ const io = new Server(server, {
 // Middleware to handle CORS and JSON body parsing
 app.use(
   cors({
-    origin: "http://localhost:3000", // Frontend URL
+    origin: "https://paypulse.onrender.com", // Frontend URL
     credentials: true,
   })
 );
