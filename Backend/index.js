@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://paypulse.onrender.com", // Frontend URL
+    origin: "https://pay-pulse-ebon.vercel.app/", // Frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -22,7 +22,7 @@ const io = new Server(server, {
 // Middleware to handle CORS and JSON body parsing
 app.use(
   cors({
-    origin: "https://paypulse.onrender.com", // Frontend URL
+    origin: "https://pay-pulse-ebon.vercel.app/", // Frontend URL
     credentials: true,
   })
 );
