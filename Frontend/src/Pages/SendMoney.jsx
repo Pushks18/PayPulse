@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import Heading from "../Components/Heading";
-import ProfileIcon from "../Components/ProfileIcon";
-import Button from "../Components/Button";
+import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import Button from "../Components/Button";
+import Heading from "../Components/Heading";
+import InputField from "../Components/InputField";
 
 const SendMoney = () => {
   const [searchParams] = useSearchParams();
@@ -11,76 +12,69 @@ const SendMoney = () => {
   const name = searchParams.get("name");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin");
+      return;
+    }
+    setLoading(false);
+  }, [navigate]);
 
   const handleSendMoney = async () => {
     if (!amount || amount <= 0) {
-      setError("Please enter a valid amount.");
+      toast.error("Please enter a valid amount.");
       return;
     }
     try {
       const response = await axios.post(
         "https://paypulse.onrender.com/api/v1/account/transfer",
+        { to: id, amount: parseFloat(amount) },
         {
-          to: id,
-          amount: parseFloat(amount), // Ensure amount is a number
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      setSuccess("Money sent successfully!");
-      setError("");
-      setTimeout(() => {
-        navigate("/dashboard"); // Navigate to dashboard after success
-      }, 2000);
+      toast.success("Money sent successfully!");
+      setTimeout(() => navigate("/dashboard"), 2000);
     } catch (err) {
-      console.error(err);
-      setError("Failed to send money. Please try again.");
-      setSuccess("");
+      console.error("Error during the transaction:", err);
+      toast.error("Failed to send money. Please try again.");
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Toaster />
+        <span>Loading...</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-gray-300 h-[735px] items-center justify-center flex">
-      <div className="bg-white flex flex-col w-[400px] p-6 rounded-md">
-        <div className="flex justify-center items-center">
-          <Heading text={"Send Money"} />
-        </div>
-
-        <div className="flex space-x-2 mt-10 justify-start items-start ml-4">
-          <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
-            <div className="flex flex-col justify-center h-full text-xl">
-              {name[0].toUpperCase()}
-            </div>
-          </div>
-
-          <div className="font-semibold text-2xl">{name}</div>
-        </div>
-
-        <div className="font-semibold text-lg ml-6 mt-3">Amount (in Rs)</div>
-        <div className="ml-6 mt-3 mb-5">
-          <input
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 to-gray-700">
+      <div className="w-full max-w-md p-6 bg-black/60 backdrop-blur-sm rounded-xl shadow-xl border border-gray-800">
+        <Heading text="Send Money" />
+        <p className="text-gray-300 mt-2 text-sm md:text-lg">
+          Send money to {name}
+        </p>
+        <div className="space-y-4 mt-4">
+          <InputField
             onChange={(e) => setAmount(e.target.value)}
-            value={amount}
+            label="Amount"
             type="number"
             placeholder="Enter amount"
-            className="w-[350px] rounded-md border border-b-2 border-gray-300 p-2"
+            className="text-white bg-gray-800"
           />
-        </div>
-
-        {error && <div className="text-red-500 text-center mb-3">{error}</div>}
-        {success && (
-          <div className="text-green-500 text-center mb-3">{success}</div>
-        )}
-
-        <div className="mb-9 flex justify-center">
-          <Button onClick={handleSendMoney} button={"Send Money"} />
+          <div className="flex justify-center mt-5">
+            <Button onClick={handleSendMoney} text="Send Money" />
+          </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

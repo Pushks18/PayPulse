@@ -28,7 +28,7 @@ const Modal = ({ to }) => {
             />
           </div>
           <div className="mb-9">
-            <Button button={"Send Money"} />
+            <Button text={"Send Money"} />
           </div>
         </div>
       </div>

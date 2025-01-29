@@ -1,3 +1,7 @@
+require("dotenv").config(); // Load environment variables from .env
+
+console.log("JWT_SECRET:", process.env.JWT_SECRET); // Log the JWT_SECRET value
+
 module.exports = {
-  JWT_SECRET: "your-jwt-secret",
+  JWT_SECRET: process.env.JWT_SECRET, // Use the value from the environment variable
 };

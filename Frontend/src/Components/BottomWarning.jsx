@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const BottomWarning = ({ label, buttonText, to }) => {
   return (
     <div>
-      <div className="py-2 text-sm flex justify-center text-black font-semibold ">
-        <div className="text-black">{label}</div>
+      <div className="py-2 text-sm flex justify-center text-white font-semibold ">
+        <div className="text-white">{label}</div>
         <Link className="pointer underline pl-1 cursor-pointer" to={to}>
           {buttonText}
         </Link>

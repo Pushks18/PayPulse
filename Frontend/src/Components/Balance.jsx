@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const Balance = () => {
   const [balance, setBalance] = useState();
+
   useEffect(() => {
     axios
       .get("https://paypulse.onrender.com/api/v1/account/balance", {
@@ -11,9 +12,12 @@ const Balance = () => {
         },
       })
       .then((res) => {
-        setBalance(res.data.balance);
+        // Round the balance to two decimal places and add trailing zeroes
+        const roundedBalance = res.data.balance.toFixed(2);
+        setBalance(roundedBalance);
       });
   }, []);
+
   return (
     <div>
       <div className="flex flex-col">
