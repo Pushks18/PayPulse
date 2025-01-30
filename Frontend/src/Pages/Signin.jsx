@@ -17,7 +17,10 @@ function Signin() {
     try {
       const res = await axios.post(
         "https://paypulse.onrender.com/api/v1/users/signin",
-        { username, password }
+        {
+          username,
+          password,
+        }
       );
 
       if (res.data.token) {

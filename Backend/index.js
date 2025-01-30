@@ -23,6 +23,8 @@ const io = new Server(server, {
 app.use(
   cors({
     origin: "https://pay-pulse-ebon.vercel.app", // Frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Stripe-Signature"],
     credentials: true,
   })
 );
