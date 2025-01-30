@@ -36,20 +36,20 @@ router.get("/history", async (req, res) => {
     const populatedTransactions = await Promise.all(
       transactions.map(async (transaction) => {
         // Log the transaction being processed
-        console.log(
-          `Processing transaction with from: ${transaction.from}, to: ${transaction.to}`
-        );
+        // console.log(
+        //   `Processing transaction with from: ${transaction.from}, to: ${transaction.to}`
+        // );
 
         // Fetch the 'from' user details
         const fromUser = await User.findOne({ userId: transaction.from });
-        console.log(
-          `Looking up from user: ${transaction.from}, result:`,
-          fromUser
-        ); // Log the result of the lookup
+        // console.log(
+        //   `Looking up from user: ${transaction.from}, result:`,
+        //   fromUser
+        // ); // Log the result of the lookup
 
         // Fetch the 'to' user details
         const toUser = await User.findOne({ userId: transaction.to });
-        console.log(`Looking up to user: ${transaction.to}, result:`, toUser); // Log the result of the lookup
+        // console.log(`Looking up to user: ${transaction.to}, result:`, toUser); // Log the result of the lookup
 
         return {
           ...transaction.toObject(), // Spread transaction details

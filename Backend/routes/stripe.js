@@ -16,7 +16,7 @@ router.post("/create-payment-intent", async (req, res) => {
       automatic_payment_methods: { enabled: true },
     });
 
-    console.log("Payment intent created:", paymentIntent);
+    // console.log("Payment intent created:", paymentIntent);
 
     res.json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {

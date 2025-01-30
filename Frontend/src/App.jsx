@@ -19,18 +19,16 @@ function App() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      console.log("Connecting to WebSocket...");
+      // console.log("Connecting to WebSocket...");
       socket.connect();
       socket.emit("authenticate", { token });
-      socket.on("connect", () => console.log("Connected to WebSocket server"));
+      socket.on("connect", () => {});
       socket.on("balance-update", (data) => {
         if (data && data.message) {
           toast.custom(<Notification message={data.message} />);
         }
       });
-      socket.on("disconnect", () =>
-        console.log("Disconnected from WebSocket server")
-      );
+      socket.on("disconnect", () => {});
       return () => socket.disconnect();
     }
   }, []);

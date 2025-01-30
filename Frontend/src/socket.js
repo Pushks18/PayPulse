@@ -12,11 +12,11 @@ const socket = io(SOCKET_URL, {
 
 // Log connection status
 socket.on("connect", () => {
-  console.log("Connected to WebSocket server:", socket.id);
+  // console.log("Connected to WebSocket server:", socket.id);
 });
 
 socket.on("disconnect", () => {
-  console.log("Disconnected from WebSocket server");
+  // console.log("Disconnected from WebSocket server");
 });
 
 export default socket;

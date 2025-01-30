@@ -32,7 +32,7 @@ app.use(express.json());
 
 // Handle socket connections and authentication
 io.on("connection", (socket) => {
-  console.log("New client connected:", socket.id);
+  // console.log("New client connected:", socket.id);
 
   // Authenticate user and join a room based on their userId
   socket.on("authenticate", ({ token }) => {
@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
 
       // Join a room based on userId
       socket.join(decoded.userId);
-      console.log(`User ${decoded.userId} authenticated and joined room.`);
+      // console.log(`User ${decoded.userId} authenticated and joined room.`);
     } catch (err) {
       console.error("Authentication failed:", err.message);
       socket.emit("authentication-error", {
@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
 
   // Handle client disconnection
   socket.on("disconnect", () => {
-    console.log("Client disconnected:", socket.id);
+    // console.log("Client disconnected:", socket.id);
   });
 });
 
@@ -77,10 +77,10 @@ app.use("/api/v1", rootRouter);
 const startServer = async () => {
   try {
     await connectToDatabase();
-    console.log("Database connected successfully!");
+    // console.log("Database connected successfully!");
 
     server.listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
+      // console.log(`Server is listening on port ${port}`);
     });
   } catch (error) {
     console.error("Failed to start the server:", error.message);

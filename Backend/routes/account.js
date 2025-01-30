@@ -11,12 +11,12 @@ module.exports = (io) => {
   // Fetch the user's balance
   router.get("/balance", authMiddleware, async (req, res) => {
     try {
-      console.log("1. Looking up userId from token:", req.userId); // Log the userId from the token
+      // console.log("1. Looking up userId from token:", req.userId); 
       const account = await Account.findOne({
         userId: ObjectId.createFromHexString(req.userId),
       }); // Ensure using ObjectId here
 
-      console.log("2. Account found:", account); // Log the account to verify
+      // console.log("2. Account found:", account); 
 
       if (!account) {
         return res.status(404).json({ message: "Account not found" });
@@ -41,7 +41,7 @@ module.exports = (io) => {
 
       const userId = ObjectId.createFromHexString(req.userId); // Ensure valid ObjectId
 
-      console.log("User ID:", userId); // Log userId for debugging
+      // console.log("User ID:", userId);
 
       // Query Account and User with ObjectId
       const account = await Account.findOne({ userId }).session(session);
@@ -105,8 +105,8 @@ module.exports = (io) => {
       const userId = ObjectId.createFromHexString(req.userId); // Ensure valid ObjectId
       const toUserId = ObjectId.createFromHexString(to); // Convert recipient's ID to ObjectId
 
-      console.log("Sender ID:", userId);
-      console.log("Recipient ID:", toUserId);
+      // console.log("Sender ID:", userId);
+      // console.log("Recipient ID:", toUserId);
 
       // Fetch sender and recipient account and user details using ObjectId conversion
       const senderAccount = await Account.findOne({ userId });

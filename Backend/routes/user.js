@@ -150,12 +150,12 @@ router.get("/bulk", authMiddleware, async (req, res) => {
 });
 
 router.get("/details", authMiddleware, async (req, res) => {
-  console.log("Received request for user details"); // Debug log
+  // console.log("Received request for user details"); // Debug log
   try {
     const user = await User.findById(req.userId).select(
       "firstName lastName username"
     );
-    console.log("Fetched user details(backend):", user); // Debug log
+    // console.log("Fetched user details(backend):", user); // Debug log
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
